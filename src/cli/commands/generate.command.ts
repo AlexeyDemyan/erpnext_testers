@@ -38,7 +38,8 @@ export class GenerateCommand implements Command {
 
     try {
       const loadedDAta = await this.load(filename);
-      await this.write(filepath, loadedDAta);
+      const transformedData = await manipulateData(loadedDAta);
+      await this.write(filepath, transformedData);
       console.info(`File ${filepath} was created and written into`)
     } catch (error: unknown) {
       console.error('Cannot generate data');
