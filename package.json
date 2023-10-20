@@ -16,7 +16,7 @@
     "ts": "ts-node",
     "helper": "npm run ts ./src/main.cli.ts -- --help",
     "reader": "npm run ts ./src/main.cli.ts -- --import ../../ERPNext_data_import/Items.csv",
-    "generate": "npm run ts ./src/main.cli.ts -- --generate ../../ERPNext_data_import/Items.csv output-data.csv"
+    "generate": "npm run ts ./src/main.cli.ts -- --generate ../../ERPNext_data_import/Items.csv ./output/output-data.csv"
   },
   "devDependencies": {
     "@types/node": "18.17.15",
