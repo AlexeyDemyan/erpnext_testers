@@ -15,10 +15,12 @@
     "clean": "rimraf dist",
     "ts": "ts-node",
     "helper": "npm run ts ./src/main.cli.ts -- --help",
-    "reader": "npm run ts ./src/main.cli.ts -- --import ../../ERPNext_data_import/Items.csv"
+    "reader": "npm run ts ./src/main.cli.ts -- --import ../../ERPNext_data_import/Items.csv",
+    "generate": "npm run ts ./src/main.cli.ts -- --generate ../../ERPNext_data_import/Items.csv test-output-data.tsv"
   },
   "devDependencies": {
     "@types/node": "18.17.15",
+    "json-server": "0.17.4",
     "rimraf": "5.0.1",
     "ts-node": "10.9.1",
     "typescript": "5.2.2"
