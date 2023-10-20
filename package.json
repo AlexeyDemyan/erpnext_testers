@@ -13,7 +13,9 @@
     "build": "npm run clean && npm run compile",
     "compile": "tsc -p tsconfig.json",
     "clean": "rimraf dist",
-    "ts": "ts-node"
+    "ts": "ts-node",
+    "helper": "npm run ts ./src/main.cli.ts -- --help",
+    "reader": "npm run ts ./src/main.cli.ts -- --import ../../ERPNext_data_import/Items.csv"
   },
   "devDependencies": {
     "@types/node": "18.17.15",
