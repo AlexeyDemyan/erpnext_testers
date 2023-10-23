@@ -28,13 +28,33 @@ export function generateOutputCSVFileFromArray(
 
   totalOutput.push(firstLine.map((entry) => `"${entry}"`).join(","));
 
-  let secondLine: string[] = [...headersToInsert];
+  for (let i = 0; i < itemLines.length; i++) {
+    let line: string[] = [];
 
-  columnNumbers.forEach((elt) => {
-    secondLine.push(itemLines[0][elt]);
-  })
+    if (i === 0) {
+      line = [...headersToInsert];
+      columnNumbers.forEach((elt) => {
+        line.push(itemLines[i][elt]);
+      });
+    } else {
+      line = [];
+      headersToInsert.forEach(() => {
+        line.push(`""`);
+      });
+      columnNumbers.forEach((elt) => {
+        line.push(itemLines[i][elt]);
+      });
+    }
+    totalOutput.push(line.map((entry) => `"${entry}"`).join(","));
+  }
 
-  totalOutput.push(secondLine.map((entry) => `"${entry}"`).join(","));
+  // let secondLine: string[] = [...headersToInsert];
+
+  // columnNumbers.forEach((elt) => {
+  //   secondLine.push(itemLines[0][elt]);
+  // });
+
+  // totalOutput.push(secondLine.map((entry) => `"${entry}"`).join(","));
 
   // console.log(`columnsToTake in generateOutputCSVFileFromArray`);
   // console.log(columnsToTake);
