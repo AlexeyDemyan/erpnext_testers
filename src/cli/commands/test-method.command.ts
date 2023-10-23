@@ -1,6 +1,6 @@
 import { Command } from "./command.interface.js";
 import { CSVFileReader } from "../../shared/libs/file-reader/csv-file-reader.js";
-import { establishColumns } from "../../shared/helpers/common.js";
+import { establishColumns, getColumnNumbers } from "../../shared/helpers/common.js";
 
 export class TestMethodCommand implements Command {
   public getName(): string {
@@ -12,7 +12,6 @@ export class TestMethodCommand implements Command {
 
     try {
       fileReader.read();
-      console.log(fileReader.toArray());
       return fileReader.toArray();
     } catch (err) {
       if (!(err instanceof Error)) {
@@ -32,9 +31,8 @@ export class TestMethodCommand implements Command {
     try {
       const stockEntryHeaders = await this.load(filename1);
       const itemsHeaders = await this.load(filename2);
-      const columnsToTake = await establishColumns(stockEntryHeaders);
-      console.log(columnsToTake);
-      console.log(itemsHeaders);
+      const columnsToTake = establishColumns(stockEntryHeaders);
+      getColumnNumbers(columnsToTake, itemsHeaders);
     } catch (error: unknown) {
       console.error('Cannot generate data');
     }
