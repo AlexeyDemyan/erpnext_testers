@@ -1,6 +1,11 @@
 import { Command } from "./command.interface.js";
 import { CSVFileReader } from "../../shared/libs/file-reader/csv-file-reader.js";
-import { generateArrayOfLinesForCSV, generateOutputCSVFileFromArray } from "../../shared/helpers/common.js";
+import {
+  generateLinesForCSV,
+  generateOutputCSVFileFromArray,
+  establishColumns,
+  getColumnNumbers,
+} from "../../shared/helpers/index.js";
 
 export class TestMethodCommand implements Command {
   public getName(): string {
@@ -21,7 +26,7 @@ export class TestMethodCommand implements Command {
       console.error(`Can't import data from file: ${filename}`);
       console.error(`Details: ${err.message}`);
 
-      return 'Error has occured, please check error log in console';
+      return "Error has occured, please check error log in console";
     }
   }
 
@@ -31,10 +36,12 @@ export class TestMethodCommand implements Command {
     try {
       const stockEntryHeaders = await this.load(filename1);
       const itemsData = await this.load(filename2);
-      const itemLines = generateArrayOfLinesForCSV(itemsData);
-      generateOutputCSVFileFromArray(stockEntryHeaders, itemLines);
+      const itemLines = generateLinesForCSV(itemsData);
+      const columnsToTake = establishColumns(stockEntryHeaders);
+      const columnNumbers = getColumnNumbers(columnsToTake, itemsData);
+      generateOutputCSVFileFromArray(stockEntryHeaders, itemLines, columnNumbers);
     } catch (error: unknown) {
-      console.error('Cannot generate data');
+      console.error("Cannot generate data");
     }
   }
 }
