@@ -1,12 +1,12 @@
 import { Command } from "./command.interface.js";
 import { CSVFileReader } from "../../shared/libs/file-reader/csv-file-reader.js";
 import { CSVFileWriter } from "../../shared/libs/file-writer/index.js";
-// import { manipulateData } from "../../shared/helpers/index.js";
 import {
   generateLinesForCSV,
   generateOutputCSVFileFromArray,
   establishColumns,
   getColumnNumbers,
+  swapWarehouses
 } from "../../shared/helpers/index.js";
 
 export class TestMethodCommand implements Command {
@@ -48,6 +48,8 @@ export class TestMethodCommand implements Command {
       const columnsToTake = await establishColumns(stockEntryHeaders);
       const columnNumbers = await getColumnNumbers(columnsToTake, itemsData);
       const generatedData = await generateOutputCSVFileFromArray(columnsToTake, itemLines, columnNumbers);
+      const swappedData = await swapWarehouses(generatedData);
+      console.log(swappedData);
       await this.write(filepath, generatedData)
     } catch (error: unknown) {
       console.error("Cannot generate data");

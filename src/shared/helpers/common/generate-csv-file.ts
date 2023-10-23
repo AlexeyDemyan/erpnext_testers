@@ -48,20 +48,5 @@ export function generateOutputCSVFileFromArray(
     totalOutput.push(line.map((entry) => `"${entry}"`).join(","));
   }
 
-  // let secondLine: string[] = [...headersToInsert];
-
-  // columnNumbers.forEach((elt) => {
-  //   secondLine.push(itemLines[0][elt]);
-  // });
-
-  // totalOutput.push(secondLine.map((entry) => `"${entry}"`).join(","));
-
-  // console.log(`columnsToTake in generateOutputCSVFileFromArray`);
-  // console.log(columnsToTake);
-  // console.log(`first line of items in generateOutputCSVFileFromArray`);
-  // console.log(itemLines[0]);
-  // console.log(`column numbers in generateOutputCSVFileFromArray`);
-  // console.log(columnNumbers);
-
   return totalOutput.map((line) => `${line}`).join("\n");
 }

@@ -5,3 +5,5 @@ export * from './common/get-column-numbers.js';
 export * from './common/manipulate-data.js';
 export * from './common/generate-lines-for-csv.js';
 export * from './const.js';
+export * from './common/swap-warehouses.js';
+export * from './common/csv-lines-to-arrays.js'
