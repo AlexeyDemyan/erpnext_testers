@@ -1,3 +1,86 @@
+import { stockEntryDictionary, stockEntryFixedHeaders } from "./const.js";
+
+function csvFileToArray(csvText: string): string[] {
+  let outputArray = [];
+  let currentText = "";
+
+  for (let character of csvText) {
+    if (character === '"') {
+      continue;
+    }
+
+    if (character === "," || character === "\r" || character === "\n") {
+      outputArray.push(currentText);
+      currentText = "";
+    } else {
+      currentText += character;
+    }
+  }
+
+  return outputArray;
+}
+
+export function filterByHeaders(inputData: string): string {
+  return inputData;
+}
+
+export function establishColumns(stockEntryHeaders: string): string[] {
+  let columnsToTake = [];
+
+  const arrayOfHeaders = csvFileToArray(stockEntryHeaders);
+
+  for (let header of arrayOfHeaders) {
+    if (Object.keys(stockEntryFixedHeaders).includes(header) || header === "") {
+      continue;
+    }
+
+    if (Object.keys(stockEntryDictionary).includes(header)) {
+      columnsToTake.push(stockEntryDictionary[header]);
+    } else {
+      console.error(`Header ${header} not found in any of the constants`);
+    }
+  }
+
+  return columnsToTake;
+}
+
+export function getColumnNumbers(columnNames: string[], inputData: string) {
+  let currentLine = 1;
+  let headerLineNumber = 2;
+  let inputDataColumnNames: string[] = [];
+  let currentText = "";
+  let columnNumbers = [1];
+
+  for (let character of inputData) {
+    if (character === '"') {
+      continue;
+    }
+
+    if (currentLine === headerLineNumber) {
+      if (character === ",") {
+        inputDataColumnNames.push(currentText);
+        currentText = "";
+      } else {
+        currentText += character;
+      }
+    }
+
+    if (character === "\n") {
+      currentLine++;
+      continue;
+    }
+
+    if (currentLine > headerLineNumber) {
+      return;
+    }
+  }
+
+  console.log(columnNames);
+  console.log(inputDataColumnNames);
+
+  return columnNumbers;
+}
+
 export function manipulateData(inputData: string): string {
   const headerLine = 2;
   const dataLine = 8;
@@ -39,7 +122,7 @@ export function manipulateData(inputData: string): string {
   }
 
   for (let i = 0; i < headerText.length; i++) {
-    outputText+= `${headerText[i]},${dataText[i]}\n`
+    outputText += `${headerText[i]},${dataText[i]}\n`;
   }
 
   return outputText;
