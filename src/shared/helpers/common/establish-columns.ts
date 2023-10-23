@@ -8,11 +8,13 @@ export function establishColumns(stockEntryHeaders: string): string[] {
   const arrayOfHeaders = csvFileToArray(stockEntryHeaders);
 
   for (let header of arrayOfHeaders) {
-    if (Object.keys(stockEntryFixedHeaders).includes(header) || header === "") {
+    if (header === "") {
       continue;
     }
 
-    if (Object.keys(stockEntryDictionary).includes(header)) {
+    if (Object.keys(stockEntryFixedHeaders).includes(header))  {
+      columnsToTake.push(stockEntryFixedHeaders[header]);
+    } else if (Object.keys(stockEntryDictionary).includes(header)) {
       columnsToTake.push(stockEntryDictionary[header]);
     } else {
       console.error(`Header ${header} not found in any of the constants`);

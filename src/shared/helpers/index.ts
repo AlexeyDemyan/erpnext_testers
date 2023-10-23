@@ -4,3 +4,4 @@ export * from './common/generate-csv-file.js';
 export * from './common/get-column-numbers.js';
 export * from './common/manipulate-data.js';
 export * from './common/generate-lines-for-csv.js';
+export * from './const.js';

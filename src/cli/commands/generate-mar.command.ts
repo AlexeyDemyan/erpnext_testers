@@ -1,5 +1,7 @@
 import { Command } from "./command.interface.js";
 import { CSVFileReader } from "../../shared/libs/file-reader/csv-file-reader.js";
+import { CSVFileWriter } from "../../shared/libs/file-writer/index.js";
+// import { manipulateData } from "../../shared/helpers/index.js";
 import {
   generateLinesForCSV,
   generateOutputCSVFileFromArray,
@@ -7,9 +9,9 @@ import {
   getColumnNumbers,
 } from "../../shared/helpers/index.js";
 
-export class GenerateMarCommand implements Command {
+export class TestMethodCommand implements Command {
   public getName(): string {
-    return "--test-method";
+    return "--generate-mar";
   }
 
   public async load(filename: string): Promise<string> {
@@ -30,16 +32,23 @@ export class GenerateMarCommand implements Command {
     }
   }
 
+  public async write(filepath: string, data: string): Promise<void> {
+    const csvFileWriter = new CSVFileWriter(filepath);
+
+    await csvFileWriter.write(data);
+  }
+
   public async execute(...parameters: string[]): Promise<void> {
-    const [filename1, filename2] = parameters;
+    const [filename1, filename2, filepath] = parameters;
 
     try {
       const stockEntryHeaders = await this.load(filename1);
       const itemsData = await this.load(filename2);
-      const itemLines = generateLinesForCSV(itemsData);
-      const columnsToTake = establishColumns(stockEntryHeaders);
-      const columnNumbers = getColumnNumbers(columnsToTake, itemsData);
-      generateOutputCSVFileFromArray(columnsToTake, itemLines, columnNumbers);
+      const itemLines = await generateLinesForCSV(itemsData);
+      const columnsToTake = await establishColumns(stockEntryHeaders);
+      const columnNumbers = await getColumnNumbers(columnsToTake, itemsData);
+      const generatedData = await generateOutputCSVFileFromArray(columnsToTake, itemLines, columnNumbers);
+      await this.write(filepath, generatedData)
     } catch (error: unknown) {
       console.error("Cannot generate data");
     }
