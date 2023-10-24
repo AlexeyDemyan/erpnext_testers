@@ -39,7 +39,7 @@ export function manipulateData(inputData: string): string {
   }
 
   for (let i = 0; i < headerText.length; i++) {
-    outputText+= `${headerText[i]},${dataText[i]}\n`
+    outputText += `${headerText[i]},${dataText[i]}\n`;
   }
 
   return outputText;
