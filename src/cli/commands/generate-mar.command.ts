@@ -49,8 +49,7 @@ export class TestMethodCommand implements Command {
       const columnNumbers = await getColumnNumbers(columnsToTake, itemsData);
       const generatedData = await generateOutputCSVFileFromArray(columnsToTake, itemLines, columnNumbers);
       const swappedData = await swapWarehouses(generatedData);
-      console.log(swappedData);
-      await this.write(filepath, generatedData)
+      await this.write(filepath, swappedData)
     } catch (error: unknown) {
       console.error("Cannot generate data");
     }

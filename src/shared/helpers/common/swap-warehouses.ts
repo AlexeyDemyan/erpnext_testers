@@ -2,7 +2,7 @@ import { csvLinesToArrayOfArrays } from "../index.js";
 
 // WIP: add better checks for warehouses
 
-export function swapWarehouses(inputData: string): string[][] {
+export function swapWarehouses(inputData: string): string {
   const warehouseIndexes: number[] = [];
 
   const csvLinesToArray = csvLinesToArrayOfArrays(inputData);
@@ -16,11 +16,21 @@ export function swapWarehouses(inputData: string): string[][] {
     }
   }
 
-  for (let i = 0; i < csvLinesToArray.length; i++) {
-
+  if (warehouseIndexes.length !== 2) {
+    console.error('Found more than 2 warehouses in the header');
   }
 
-  console.log(warehouseIndexes);
+  let bufferWarehouse = csvLinesToArray[0][warehouseIndexes[0]];
+  csvLinesToArray[0][warehouseIndexes[0]] = csvLinesToArray[0][warehouseIndexes[1]];
+  csvLinesToArray[0][warehouseIndexes[1]] = bufferWarehouse;
 
-  return [['libba']]
+  let outputItems: string[] = [];
+
+  csvLinesToArray.forEach((line) => {
+    outputItems.push(line.join(','));
+  })
+
+  return outputItems.join('\n');
+
+  // return csvLinesToArray.map((line) => {line.join(',')}).join('\n');
 }

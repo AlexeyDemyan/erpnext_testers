@@ -5,6 +5,9 @@ export function csvLinesToArrayOfArrays(inputData: string): string[][] {
   let currentText = "";
 
   for (let character of inputData) {
+    if (inputData.indexOf(character) === -1) {
+      console.log(`line items in the end: ${lineItems}`)
+    }
     if (character === "\n") {
       if (lineItems.length > 0) {
         lineItems.push(currentText);
@@ -22,5 +25,7 @@ export function csvLinesToArrayOfArrays(inputData: string): string[][] {
       currentText += character;
     }
   }
+  lineItems.push(currentText);
+  lines.push(lineItems);
   return lines;
 }
