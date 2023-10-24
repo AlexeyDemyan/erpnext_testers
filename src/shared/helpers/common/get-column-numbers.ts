@@ -41,6 +41,5 @@ export function getColumnNumbers(columnNames: string[], inputData: string) {
     }
   });
 
-  console.log(columnNumbers);
   return columnNumbers;
 }

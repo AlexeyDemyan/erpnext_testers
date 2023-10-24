@@ -2,7 +2,7 @@ import { Command } from "./command.interface.js";
 import { CSVFileReader } from "../../shared/libs/file-reader/csv-file-reader.js";
 import {
   generateLinesForCSV,
-  generateOutputCSVFileFromArray,
+  generateCSVFile,
   establishColumns,
   getColumnNumbers,
 } from "../../shared/helpers/index.js";
@@ -39,7 +39,7 @@ export class GenerateMarCommand implements Command {
       const itemLines = generateLinesForCSV(itemsData);
       const columnsToTake = establishColumns(stockEntryHeaders);
       const columnNumbers = getColumnNumbers(columnsToTake, itemsData);
-      generateOutputCSVFileFromArray(columnsToTake, itemLines, columnNumbers);
+      generateCSVFile(columnsToTake, itemLines, columnNumbers);
     } catch (error: unknown) {
       console.error("Cannot generate data");
     }

@@ -1,6 +1,6 @@
 import { dataForFixedHeaders, stockEntryDictionary } from "../index.js";
 
-export function generateOutputCSVFileFromArray(
+export function generateCSVFile(
   columnsToTake: string[],
   itemLines: string[][],
   columnNumbers: number[]
@@ -39,7 +39,7 @@ export function generateOutputCSVFileFromArray(
     } else {
       line = [];
       headersToInsert.forEach(() => {
-        line.push(`""`);
+        line.push("");
       });
       columnNumbers.forEach((elt) => {
         line.push(itemLines[i][elt]);

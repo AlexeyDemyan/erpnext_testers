@@ -3,7 +3,7 @@ import { CSVFileReader } from "../../shared/libs/file-reader/csv-file-reader.js"
 import { CSVFileWriter } from "../../shared/libs/file-writer/index.js";
 import {
   generateLinesForCSV,
-  generateOutputCSVFileFromArray,
+  generateCSVFile,
   establishColumns,
   getColumnNumbers,
   swapWarehouses
@@ -47,7 +47,7 @@ export class TestMethodCommand implements Command {
       const itemLines = await generateLinesForCSV(itemsData);
       const columnsToTake = await establishColumns(stockEntryHeaders);
       const columnNumbers = await getColumnNumbers(columnsToTake, itemsData);
-      const generatedData = await generateOutputCSVFileFromArray(columnsToTake, itemLines, columnNumbers);
+      const generatedData = await generateCSVFile(columnsToTake, itemLines, columnNumbers);
       const swappedData = await swapWarehouses(generatedData);
       await this.write(filepath, swappedData)
     } catch (error: unknown) {

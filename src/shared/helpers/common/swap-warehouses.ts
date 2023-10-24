@@ -32,5 +32,6 @@ export function swapWarehouses(inputData: string): string {
 
   return outputItems.join('\n');
 
+  // WIP: check if can be improved like below:
   // return csvLinesToArray.map((line) => {line.join(',')}).join('\n');
 }
