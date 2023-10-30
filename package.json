@@ -18,7 +18,8 @@
     "reader": "npm run ts ./src/main.cli.ts -- --import ../../ERPNext_data_import/Items.csv",
     "generate": "npm run ts ./src/main.cli.ts -- --generate ../../ERPNext_data_import/Items.csv ./output/output-data.csv",
     "test-method": "npm run ts ./src/main.cli.ts -- --test-method ../../ERPNext_data_import/Stock_Entry.csv ../../ERPNext_data_import/Items.csv ./output/output-data.csv",
-    "gen-mar": "npm run ts ./src/main.cli.ts -- --generate-mar ../../ERPNext_data_import/Stock_Entry.csv ../../ERPNext_data_import/Items.csv ./output/output-data.csv"
+    "gen-mar": "npm run ts ./src/main.cli.ts -- --generate-mar ../../ERPNext_data_import/Stock_Entry.csv ../../ERPNext_data_import/Items.csv ./output/output-data.csv",
+    "gen-chris": "npm run ts ./src/main.cli.ts -- --generate-chris ../../ERPNext_data_import/complete_deliveries.xlsx ./output/output-data.csv"
   },
   "devDependencies": {
     "@types/node": "18.17.15",
@@ -31,5 +32,8 @@
   "engines": {
     "node": "^18.0.0",
     "npm": ">=8"
+  },
+  "dependencies": {
+    "xlsx": "^0.18.5"
   }
 }

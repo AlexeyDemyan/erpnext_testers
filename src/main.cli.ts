@@ -6,6 +6,7 @@ import {
   GenerateCommand,
   TestMethodCommand,
   GenerateMarCommand,
+  GenerateChrisCommand
 } from "./cli/index.js";
 
 function bootstrap() {
@@ -15,6 +16,7 @@ function bootstrap() {
   cliApplication.registerCommands([new GenerateCommand()]);
   cliApplication.registerCommands([new TestMethodCommand()]);
   cliApplication.registerCommands([new GenerateMarCommand()]);
+  cliApplication.registerCommands([new GenerateChrisCommand()]);
 
   cliApplication.processCommand(process.argv);
 }

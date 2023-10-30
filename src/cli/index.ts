@@ -5,3 +5,4 @@ export * from "./commands/import.command.js";
 export * from "./commands/generate.command.js";
 export * from "./commands/test-method.command.js";
 export * from "./commands/generate-mar.command.js";
+export * from "./commands/generate-chris.command.js";
